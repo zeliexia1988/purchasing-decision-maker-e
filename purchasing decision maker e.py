@@ -1,8 +1,10 @@
+
+import streamlit as st
+import pandas as pd
 import os
 st.write("程序当前运行目录：", os.getcwd())
 st.write("该目录下的文件：", os.listdir("."))
-import streamlit as st
-import pandas as pd
+
 from datetime import datetime
 import urllib.parse
 
@@ -167,3 +169,4 @@ if contracts is not None:
                 subject, body = generate_email_template(target_supplier, material_choice, qty_input, de_choice, pn_choice, package_choice)
 
                 st.text_area("Copier :", value=body, height=150)
+
