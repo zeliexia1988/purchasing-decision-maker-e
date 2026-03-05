@@ -41,7 +41,8 @@ def calculate_all_totals(material, de, pn, quantity, today):
         (contracts["Material"] == material) &
         (contracts["Valid_Until"] >= today) &
         (contracts["DE"] == float(de)) &
-        (contracts["PN"] == float(pn))
+        (contracts["PN"] == float(pn)) &
+        (contracts["Package"] == package.lower())
     )
     valid_matches = contracts[mask].copy()
 
@@ -156,7 +157,7 @@ if contracts is not None:
 
             # --- 显示计算出的总价表格 ---
             if show_prices:
-                price_table = calculate_all_totals(material_choice, de_choice, pn_choice, qty_input, today)
+                price_table = calculate_all_totals(material_choice, de_choice, pn_choice, qty_input, package_choice, today)
                 if price_table is not None:
                     st.write("### 💰 Comparatif des prix contractuels")
                     st.table(price_table)
@@ -169,4 +170,5 @@ if contracts is not None:
                 subject, body = generate_email_template(target_supplier, material_choice, qty_input, de_choice, pn_choice, package_choice)
 
                 st.text_area("Copier :", value=body, height=150)
+
 
