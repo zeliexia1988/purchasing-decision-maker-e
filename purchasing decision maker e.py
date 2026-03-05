@@ -36,6 +36,7 @@ def calculate_all_totals(material, de, pn, quantity, package, today):
     """
     找到所有符合条件的合同，并计算各自的总价。
     """
+    pkg_str = str(package).lower() if package else ""
     # 筛选匹配的合同
     mask = (
         (contracts["Material"] == material) &
@@ -170,6 +171,7 @@ if contracts is not None:
                 subject, body = generate_email_template(target_supplier, material_choice, qty_input, de_choice, pn_choice, package_choice)
 
                 st.text_area("Copier :", value=body, height=150)
+
 
 
 
