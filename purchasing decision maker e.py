@@ -42,7 +42,7 @@ def calculate_all_totals(material, de, pn, quantity, packge, today):
         (contracts["Valid_Until"] >= today) &
         (contracts["DE"] == float(de)) &
         (contracts["PN"] == float(pn)) &
-        (contracts["Package"] == package.lower())
+        (contracts["Package"].astype(str).str.lower() == pkg_str)
     )
     valid_matches = contracts[mask].copy()
 
@@ -170,6 +170,7 @@ if contracts is not None:
                 subject, body = generate_email_template(target_supplier, material_choice, qty_input, de_choice, pn_choice, package_choice)
 
                 st.text_area("Copier :", value=body, height=150)
+
 
 
 
